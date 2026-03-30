@@ -1,0 +1,1 @@
+# This repo stores my codes for learning TypeScripts.
