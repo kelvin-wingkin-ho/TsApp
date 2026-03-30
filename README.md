@@ -1,1 +1,2 @@
-# This repo stores my codes for learning TypeScripts.
+# TsApp
+A Node.js App written in TypeScript
