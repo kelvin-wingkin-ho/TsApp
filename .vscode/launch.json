@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug API",
+      "request": "launch",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev:api"],
+      "skipFiles": ["<node_internals>/**"],
+      "type": "node"
+    }
+  ]
+}
