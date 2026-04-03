@@ -1,6 +1,8 @@
 const Home: React.FC = () => {
     return (
-        <div>Home Page</div>
+        <div>
+            Home Page
+        </div>
     );
 }
 

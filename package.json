@@ -1,0 +1,19 @@
+{
+  "name": "ts-app",
+  "version": "1.0.0",
+  "description": "A Node.js App written in TypeScript",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:api": "npm run dev --workspace=student-checkin-api",
+    "dev:web": "npm run dev --workspace=student-checkin-ui",
+    "dev": "concurrently -n \"WEB,API\" -c \"blue,green\" \"npm run dev:web\" \"npm run dev:api\""
+  },
+  "keywords": [],
+  "author": "Kelvin Ho",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
