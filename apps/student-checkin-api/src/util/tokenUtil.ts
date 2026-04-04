@@ -13,3 +13,21 @@ export const generateRefreshToken = (user: User) => {
     const {password, ...userExcludePwd} = user;
     return jwt.sign(userExcludePwd, REFRESH_SECRET, { expiresIn: '7d'});
 }
+
+export const verifyAccessToken = (token: string): User | null => {
+    try {
+        return jwt.verify(token, ACCESS_SECRET) as unknown as User;
+    }
+    catch (err) {
+        return null;
+    }    
+}
+
+export const verifyRefreshToken = (token: string): User | null => {
+    try {
+        return jwt.verify(token, REFRESH_SECRET) as unknown as User;
+    }
+    catch (err) {
+        return null;
+    }
+}

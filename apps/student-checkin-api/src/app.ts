@@ -1,12 +1,24 @@
 import express from 'express';
-import type { Application, Request, Response } from 'express';
+import type { Application, NextFunction, Request, Response } from 'express';
 import cors from 'cors';
-import { generateAccessToken } from './util/tokenUtil.js';
+import { generateAccessToken, verifyAccessToken } from './util/tokenUtil.js';
 
 const app: Application = express();
 
 app.use(cors());
 app.use(express.json());
+
+// Middleware to protect routes
+const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (!token) return res.sendStatus(401);
+
+  if (!verifyAccessToken(token)) return res.sendStatus(403);
+
+  next();  
+}
 
 // Mock user (replace with DB in real app)
 export const mockUser = {
@@ -54,5 +66,11 @@ app.post('/token', (req: Request, res: Response) => {
     accessToken: generateAccessToken(req.body)
   });
 })
+
+
+
+app.get('/api/tasks', authenticateToken, (req: Request, res: Response) => {
+  return [];
+});
 
 export default app;
