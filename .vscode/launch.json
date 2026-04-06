@@ -8,6 +8,19 @@
       "runtimeArgs": ["run", "dev:api"],
       "skipFiles": ["<node_internals>/**"],
       "type": "node"
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Debug UI",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}/apps/student-checkin-ui",
+      "preLaunchTask": "Start Vite App",
+      "skipFiles": [
+        "<node_internals>/**",
+        "**/node_modules/**",
+        "**/@vite/client/**"
+      ]
     }
   ]
 }
