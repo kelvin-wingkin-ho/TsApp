@@ -3,6 +3,7 @@ import Health from './Health';
 import Home from './Home';
 import Login from './pages/Login';
 import TaskApp from './pages/TaskApp';
+import { AuthProvider } from './AuthContext';
 
 function App() {
   return (
@@ -13,12 +14,14 @@ function App() {
           <Link to="/login">Login</Link> | 
           <Link to="/tasks">Tasks</Link>
       </nav>
-      <Routes>
-        <Route path="/home" element={<Home/>}/>
-        <Route path="/health" element={<Health/>}/>
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/tasks" element={<TaskApp/>}/>
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/home" element={<Home/>}/>
+          <Route path="/health" element={<Health/>}/>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/tasks" element={<TaskApp/>}/>
+        </Routes>
+      </AuthProvider>
     </div>
   )
 }

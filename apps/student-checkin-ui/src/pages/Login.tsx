@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useAuth } from '../hooks/useAuth';
 
 interface LoginForm {
     email: string;
@@ -9,6 +10,7 @@ const Login: React.FC = () => {
     const [form, setForm] = useState<LoginForm>({email: '', password: ''});
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
+    const { login } = useAuth();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setForm({ ...form, [e.target.name]: e.target.value})
@@ -25,16 +27,20 @@ const Login: React.FC = () => {
                 body: JSON.stringify(form)
             });
 
-            const data = await response.json();
+            const data: {
+                message: string, 
+                accessToken: string
+            } = await response.json();
 
             if (!response.ok) {
-                setError(data.message || 'Login failed');
+                setError(data.message || ' Login failed');
             } else {
                 // Handle successful Login
                 console.log('Login success:', data);
+                login(data.accessToken);
             }
         } catch (err) {
-            setError('Network error');
+            setError(`Network error: ${err}`);
         }
         finally {
             setLoading(false);

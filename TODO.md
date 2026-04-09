@@ -1,0 +1,2 @@
+The API /api/login should return a JWT. The JWT should be stored in a global state of the React APP.
+With token in place, every API requests from the frontend should have the token attached in the header.
